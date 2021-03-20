@@ -33,7 +33,6 @@ class UserAdapter  internal constructor(private val context: Context) : BaseAdap
         private val txtName: TextView = view.findViewById(R.id.txt_name)
         private val txtUsername: TextView = view.findViewById(R.id.txt_username)
         private val imgPhoto: ImageView = view.findViewById(R.id.img_photo)
-//        private val txtRepository: TextView = view.findViewById(R.id.txt_repository)
         private val txtFollower: TextView = view.findViewById(R.id.txt_follower)
         private val txtFollowing: TextView = view.findViewById(R.id.txt_following)
         private val txtLocation: TextView = view.findViewById(R.id.txt_location)
@@ -43,7 +42,6 @@ class UserAdapter  internal constructor(private val context: Context) : BaseAdap
             txtName.text = user.name
             txtUsername.text = user.username
             imgPhoto.setImageResource(user.photo)
-//            txtRepository.text = user.repository
             txtFollower.text = user.follower
             txtFollowing.text = user.following
             txtLocation.text = user.location
