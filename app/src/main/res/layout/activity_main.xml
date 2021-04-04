@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E9161616"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
         android:layout_marginVertical="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FB6500"
-            android:textSize="34dp"
-            android:textStyle="bold"
-            android:text="Github"/>
+            android:text="Github"
+            android:textColor="#ED5F00"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="User"
             android:textColor="#ffff"
-            android:textSize="34dp"
-            android:textStyle="bold"
-            android:text="User"/>
-
+            android:textSize="34sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_list"
-        android:layout_marginTop="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_user" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,52 +1,42 @@
 package com.githubuserapp
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.githubuserapp.databinding.ItemUserBinding
 
-class UserAdapter  internal constructor(private val context: Context) : BaseAdapter() {
+class UserAdapter(private val listUser: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
-    internal var users = arrayListOf<User>()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
 
-    override fun getCount(): Int = users.size
+        val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListViewHolder(binding)
 
-    override fun getItem(p0: Int): Any = users[p0]
-
-    override fun getItemId(p0: Int): Long = p0.toLong()
-
-    override fun getView(position: Int, view: View?, viewGroup: ViewGroup): View {
-        var itemView = view
-        if (itemView == null) {
-            itemView = LayoutInflater.from(context).inflate(R.layout.item_user, viewGroup, false)
-        }
-        val viewHolder = ViewHolder(itemView as View)
-        val user = getItem(position) as User
-        viewHolder.bind(user)
-        return itemView
     }
 
-    private inner class ViewHolder(view: View) {
-        private val txtName: TextView = view.findViewById(R.id.txt_name)
-        private val txtUsername: TextView = view.findViewById(R.id.txt_username)
-        private val imgPhoto: ImageView = view.findViewById(R.id.img_photo)
-        private val txtFollower: TextView = view.findViewById(R.id.txt_follower)
-        private val txtFollowing: TextView = view.findViewById(R.id.txt_following)
-        private val txtLocation: TextView = view.findViewById(R.id.txt_location)
-        private val txtCompany: TextView = view.findViewById(R.id.txt_company)
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        holder.bind(listUser[position])
+    }
 
+    override fun getItemCount(): Int = listUser.size
+
+    inner class ListViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
-            txtName.text = user.name
-            txtUsername.text = user.username
-            imgPhoto.setImageResource(user.photo)
-            txtFollower.text = user.follower
-            txtFollowing.text = user.following
-            txtLocation.text = user.location
-            txtCompany.text = user.company
+            with(binding){
+                Glide.with(itemView.context)
+                        .load(user.photo)
+                        .apply(RequestOptions().override(55, 55))
+                        .into(imgPhoto)
+                imgPhoto.setImageResource(user.photo)
+                txtUsername.text = user.username
+                txtName.text = user.name
+                txtFollower.text = user.follower
+                txtFollowing.text = user.following
+                txtCompany.text = user.company
+                txtLocation.text = user.location
+            }
         }
     }
-
 }

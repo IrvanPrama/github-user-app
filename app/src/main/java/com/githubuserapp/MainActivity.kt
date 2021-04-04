@@ -7,75 +7,60 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.githubuserapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: UserAdapter
-    private lateinit var dataName: Array<String>
-    private lateinit var dataUsername: Array<String>
-    private lateinit var dataPhoto: TypedArray
-    private lateinit var dataRepository: Array<String>
-    private lateinit var dataFollower: Array<String>
-    private lateinit var dataFollowing: Array<String>
-    private lateinit var dataLocation: Array<String>
-    private lateinit var dataCompany: Array<String>
-    private var users = arrayListOf<User>()
+    private lateinit var binding: ActivityMainBinding
+
+    private var list = arrayListOf<User>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        Toast.makeText(this,"Welcome", Toast.LENGTH_SHORT).show()
+        binding.rvList.setHasFixedSize(true)
 
-        val listView: ListView = findViewById(R.id.lv_list)
-        adapter = UserAdapter(this)
-        listView.adapter = adapter
-
-        prepare()
-        addItem()
-
-        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-
-            val intentWithParcelable = Intent(this@MainActivity, DetailActivity::class.java)
-
-            val selectedUser: User = users[position]
-
-            intentWithParcelable.putExtra(DetailActivity.KEY_USER, selectedUser)
-            startActivity(intentWithParcelable)
-        }
+        list.addAll(getListUser())
+        showRecyclerList()
 
     }
 
-    private fun prepare() {
-        dataName = resources.getStringArray(R.array.name)
-        dataUsername = resources.getStringArray(R.array.username)
-        dataPhoto = resources.obtainTypedArray(R.array.avatar)
-        dataRepository = resources.getStringArray(R.array.repository)
-        dataFollower = resources.getStringArray(R.array.followers)
-        dataFollowing = resources.getStringArray(R.array.following)
-        dataLocation = resources.getStringArray(R.array.location)
-        dataCompany = resources.getStringArray(R.array.company)
-    }
+    fun getListUser(): ArrayList<User> {
+        val txtName = resources.getStringArray(R.array.name)
+        val txtUsername= resources.getStringArray(R.array.username)
+        val txtFollower= resources.getStringArray(R.array.followers)
+        val txtFollowing= resources.getStringArray(R.array.following)
+        val txtLocation= resources.getStringArray(R.array.location)
+        val txtCompany= resources.getStringArray(R.array.company)
+        val imgPhoto = resources.getIntArray(R.array.avatar)
 
-    private fun addItem() {
-        for (position in dataName.indices) {
+
+        val listUser = ArrayList<User>()
+        for (position in imgPhoto.indices) {
             val user = User(
-                    dataPhoto.getResourceId(position, -1),
-                    dataName[position],
-                    dataUsername[position],
-                    dataRepository[position],
-                    dataFollower[position],
-                    dataFollowing[position],
-                    dataLocation[position],
-                    dataCompany[position],
+                    imgPhoto[position],
+                    txtName[position],
+                    txtUsername[position],
+                    txtFollower[position],
+                    txtFollowing[position],
+                    txtCompany[position],
+                    txtLocation[position]
             )
-            users.add(user)
+            listUser.add(user)
         }
-        adapter.users = users
+        return listUser
     }
 
+    private fun showRecyclerList() {
+        binding.rvList.layoutManager = LinearLayoutManager(this)
+        val listUserAdapter = UserAdapter(list)
+        binding.rvList.adapter = listUserAdapter
+    }
 
 }
 
