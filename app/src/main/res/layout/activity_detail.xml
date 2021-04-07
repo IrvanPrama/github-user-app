@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/name_user"
+            android:fontFamily="@font/opensansbold"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/company"
+            android:fontFamily="@font/opensansreguler"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/name_user"
             app:layout_constraintTop_toBottomOf="@+id/name_user" />
@@ -38,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/location"
+            android:fontFamily="@font/opensansreguler"
             app:layout_constraintStart_toStartOf="@+id/company"
             app:layout_constraintTop_toBottomOf="@+id/company" />
 
@@ -45,78 +48,82 @@
             android:id="@+id/following"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:fontFamily="@font/opensansreguler"
             android:text="@string/following"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="19sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/avatar"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/opensansreguler"
             android:text="@string/txt_following"
             android:textAlignment="center"
             android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/following"
-            app:layout_constraintStart_toStartOf="@+id/following"
-            app:layout_constraintTop_toBottomOf="@+id/following" />
+            app:layout_constraintEnd_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/follower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/opensansreguler"
             android:text="@string/follower"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="19sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/repository"
-            app:layout_constraintStart_toEndOf="@+id/following"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="@+id/textView6" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/opensansreguler"
             android:text="@string/txt_follower"
             android:textAlignment="center"
             android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/follower"
-            app:layout_constraintStart_toStartOf="@+id/follower"
-            app:layout_constraintTop_toBottomOf="@+id/follower" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/repository"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/opensansreguler"
             android:text="@string/repository"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="19sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/textView8" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/opensansreguler"
             android:text="@string/txt_repository"
             android:textAlignment="center"
             android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="@+id/repository"
-            app:layout_constraintStart_toStartOf="@+id/repository"
-            app:layout_constraintTop_toBottomOf="@+id/repository" />
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
@@ -141,8 +148,9 @@
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"
                 app:tabInlineLabel="true"
+                android:fontFamily="@font/opensansreguler"
                 app:tabMode="fixed"
-                app:tabSelectedTextColor="@android:color/holo_orange_dark"
+                app:tabSelectedTextColor="@color/dark_3"
                 app:tabTextColor="@android:color/darker_gray" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -152,10 +160,12 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/circle_background"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
-            android:paddingEnd="9dp"
-            android:paddingBottom="9dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
             android:src="@android:color/darker_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

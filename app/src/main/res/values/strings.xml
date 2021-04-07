@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Github User App</string>
-    <string name="title_one">Github</string>
+    <string name="app_name">GitHub User App</string>
+    <string name="title_one">GitHUB</string>
     <string name="title_two">User</string>
     <string name="name_user">Nama User</string>
     <string name="username">username</string>
