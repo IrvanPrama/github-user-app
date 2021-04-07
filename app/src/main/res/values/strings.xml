@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">Github User App</string>
+    <string name="title_one">Github</string>
+    <string name="title_two">User</string>
     <string name="name_user">Nama User</string>
-    <string name="username">Username</string>
-    <string name="company">Nama Perusahaan</string>
-    <string name="follower">2.450</string>
-    <string name="location">Lokasi</string>
+    <string name="username">username</string>
+    <string name="company">Perusahaan</string>
+    <string name="follower">2.490</string>
+    <string name="following">200</string>
+    <string name="repository">100</string>
+    <string name="txt_following">Mengikuti</string>
+    <string name="txt_follower">Pengikut</string>
+    <string name="txt_repository">Repository</string>
+    <string name="location">Denpasar</string>
     <string name="lorem">lorem ipsum dolor sit amet</string>
     <!-- Other string resources-->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
@@ -99,6 +108,19 @@
         <item>10</item>
     </string-array>
 
+    <string-array name="photo">
+        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/3/3f/Ahmad_Yani.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/e/ed/Bung_Tomo.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/b/be/Col_Gatot_Subroto%2C_Kenang-Kenangan_Pada_Panglima_Besar_Letnan_Djenderal_Soedirman%2C_p27.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/3/3a/Ki_Hadjar_Dewantara_Mimbar_Umum_18_October_1949_p2.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/VP_Hatta.jpg/330px-VP_Hatta.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Sudirman.jpg/486px-Sudirman.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Presiden_Sukarno.jpg/330px-Presiden_Sukarno.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/c/c3/Supomo_from_President_Website.JPG</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/TanMalaka_DariPendjara_ed3.jpg/330px-TanMalaka_DariPendjara_ed3.jpg</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="avatar">
         <item>@drawable/user1</item>
         <item>@drawable/user2</item>

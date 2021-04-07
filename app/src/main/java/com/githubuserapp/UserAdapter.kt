@@ -7,7 +7,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.githubuserapp.databinding.ItemUserBinding
 
+
 class UserAdapter(private val listUser: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
+
+    private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
 
@@ -23,20 +30,23 @@ class UserAdapter(private val listUser: ArrayList<User>) : RecyclerView.Adapter<
     override fun getItemCount(): Int = listUser.size
 
     inner class ListViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
-            with(binding){
-                Glide.with(itemView.context)
-                        .load(user.photo)
-                        .apply(RequestOptions().override(55, 55))
-                        .into(imgPhoto)
-                imgPhoto.setImageResource(user.photo)
-                txtUsername.text = user.username
-                txtName.text = user.name
-                txtFollower.text = user.follower
-                txtFollowing.text = user.following
-                txtCompany.text = user.company
-                txtLocation.text = user.location
+
+            fun bind(user: User) {
+                with(binding) {
+                    Glide.with(itemView.context)
+                            .load(user.photo)
+                            .apply(RequestOptions().override(55, 55))
+                            .into(avatar)
+
+                    txtName.text = user.name
+                    txtUsername.text = user.username
+
+                    itemView.setOnClickListener { onItemClickCallback?.onItemClicked(user) }
+                }
             }
-        }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: User)
     }
 }

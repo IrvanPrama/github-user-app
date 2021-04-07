@@ -1,11 +1,8 @@
 package com.githubuserapp
 
 import android.content.Intent
-import android.content.res.TypedArray
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ListView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.githubuserapp.databinding.ActivityMainBinding
@@ -13,9 +10,7 @@ import com.githubuserapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private var list = arrayListOf<User>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,23 +28,25 @@ class MainActivity : AppCompatActivity() {
     fun getListUser(): ArrayList<User> {
         val txtName = resources.getStringArray(R.array.name)
         val txtUsername= resources.getStringArray(R.array.username)
-        val txtFollower= resources.getStringArray(R.array.followers)
+        val txtRepository= resources.getStringArray(R.array.repository)
         val txtFollowing= resources.getStringArray(R.array.following)
-        val txtLocation= resources.getStringArray(R.array.location)
+        val txtFollower= resources.getStringArray(R.array.followers)
         val txtCompany= resources.getStringArray(R.array.company)
-        val imgPhoto = resources.getIntArray(R.array.avatar)
+        val txtLocation= resources.getStringArray(R.array.location)
+        val imgPhoto = resources.getStringArray(R.array.photo)
 
 
         val listUser = ArrayList<User>()
-        for (position in imgPhoto.indices) {
+        for (position in txtName.indices) {
             val user = User(
-                    imgPhoto[position],
                     txtName[position],
                     txtUsername[position],
-                    txtFollower[position],
+                    txtRepository[position],
                     txtFollowing[position],
+                    txtFollower[position],
                     txtCompany[position],
-                    txtLocation[position]
+                    txtLocation[position],
+                    imgPhoto[position]
             )
             listUser.add(user)
         }
@@ -58,9 +55,33 @@ class MainActivity : AppCompatActivity() {
 
     private fun showRecyclerList() {
         binding.rvList.layoutManager = LinearLayoutManager(this)
-        val listUserAdapter = UserAdapter(list)
-        binding.rvList.adapter = listUserAdapter
+        val userAdapter = UserAdapter(list)
+        binding.rvList.adapter = userAdapter
+
+        userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun onItemClicked(user: User) {
+                showSelectedUser(user)
+            }
+        })
     }
 
+
+    private fun showSelectedUser(user: User) {
+//        Toast.makeText(this, "Kamu memilih ${user.name}", Toast.LENGTH_SHORT).show()
+        val dataUser = User(
+                user.name,
+                user.username,
+                user.repository,
+                user.following,
+                user.follower,
+                user.location,
+                user.company,
+                user.photo
+        )
+
+        val intentDetail = Intent(this@MainActivity, DetailActivity::class.java)
+        intentDetail.putExtra(DetailActivity.KEY_USER, dataUser)
+        startActivity(intentDetail)
+    }
 }
 
