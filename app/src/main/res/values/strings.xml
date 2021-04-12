@@ -2,16 +2,22 @@
     <string name="app_name">GitHub User App</string>
     <string name="title_one">GitHUB</string>
     <string name="title_two">User</string>
-    <string name="name_user">Nama User</string>
-    <string name="username">username</string>
-    <string name="company">Perusahaan</string>
-    <string name="follower">2.490</string>
-    <string name="following">200</string>
-    <string name="repository">100</string>
+    <string name="name_user">Gede Irvan Pramantar</string>
+    <string name="username">gedeirvan</string>
+    <string name="company">Google</string>
+    <string name="search_placeholder">Search someone here</string>
+    <string name="text_not_found">Sorry, cant find that user, please search someone else :D</string>
+    <string name="followers">%d</string>
+    <string name="followings">%d</string>
+    <string name="follower">000</string>
+    <string name="following">000</string>
+    <string name="repository">000</string>
     <string name="txt_following">Mengikuti</string>
     <string name="txt_follower">Pengikut</string>
     <string name="txt_repository">Repository</string>
     <string name="location">Denpasar</string>
+    <string name="type">User</string>
+    <string name="search">Hey you! Lets find someone :)</string>
     <string name="lorem">lorem ipsum dolor sit amet</string>
     <!-- Other string resources-->
 

@@ -14,38 +14,39 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/name_user"
+            android:id="@+id/name_user_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name_user"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/opensansbold"
+            android:text="@string/name_user"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/avatar"
-            app:layout_constraintTop_toBottomOf="@+id/avatar" />
+            app:layout_constraintStart_toStartOf="@+id/avatar_detail"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_detail" />
 
         <TextView
-            android:id="@+id/company"
+            android:id="@+id/company_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/company"
             android:fontFamily="@font/opensansreguler"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@+id/name_user"
-            app:layout_constraintTop_toBottomOf="@+id/name_user" />
+            app:layout_constraintStart_toStartOf="@+id/name_user_detail"
+            app:layout_constraintTop_toBottomOf="@+id/name_user_detail" />
 
         <TextView
-            android:id="@+id/location"
+            android:id="@+id/location_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/location"
             android:fontFamily="@font/opensansreguler"
-            app:layout_constraintStart_toStartOf="@+id/company"
-            app:layout_constraintTop_toBottomOf="@+id/company" />
+            app:layout_constraintStart_toStartOf="@+id/company_detail"
+            app:layout_constraintTop_toBottomOf="@+id/company_detail" />
 
         <TextView
-            android:id="@+id/following"
+            android:id="@+id/following_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansreguler"
@@ -72,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/follower"
+            android:id="@+id/follower_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansreguler"
@@ -95,11 +96,11 @@
             android:textAlignment="center"
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@+id/avatar_detail"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/repository"
+            android:id="@+id/repository_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/opensansreguler"
@@ -125,6 +126,28 @@
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/location_detail"
+            tools:layout_editor_absoluteX="16dp">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/opensansreguler"
+                app:tabGravity="fill"
+                app:tabInlineLabel="true"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/dark_3"
+                app:tabTextColor="@android:color/darker_gray" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
@@ -133,30 +156,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/location"
-            tools:layout_editor_absoluteX="16dp">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabInlineLabel="true"
-                android:fontFamily="@font/opensansreguler"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/dark_3"
-                app:tabTextColor="@android:color/darker_gray" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avatar"
+            android:id="@+id/avatar_detail"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginStart="16dp"
@@ -169,6 +170,17 @@
             android:src="@android:color/darker_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_detail"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/avatar_detail"
+            app:layout_constraintEnd_toEndOf="@+id/avatar_detail"
+            app:layout_constraintStart_toStartOf="@+id/avatar_detail"
+            app:layout_constraintTop_toTopOf="@+id/avatar_detail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

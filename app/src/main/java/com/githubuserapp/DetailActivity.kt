@@ -1,58 +1,89 @@
 package com.githubuserapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
-import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.githubuserapp.fragments.FollowersFragment
-import com.githubuserapp.fragments.FollowingsFragment
 import com.githubuserapp.fragments.adapters.ViewPagerAdapter
-import com.google.android.material.tabs.TabLayout
+import com.githubuserapp.vModel.data.User
+import com.githubuserapp.vModel.DetailViewModel
+import com.githubuserapp.vModel.data.UserData
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.list_users.*
 
 class DetailActivity : AppCompatActivity() {
 
     companion object {
-        const val KEY_USER = "extra_person"
+        const val EXTRA_DATA = "extra_data"
     }
+
+    private lateinit var viewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val dataUser = intent.getParcelableExtra<User>(KEY_USER) as User
-        supportActionBar?.title = dataUser.username
+        showLoading(true)
 
-        findViewById<TextView>(R.id.name_user).text = dataUser.name
+        val intent = intent.getParcelableExtra<User>(EXTRA_DATA) as UserData
+        val getUsername = intent.username
 
-        Glide.with(this)
-            .load(dataUser.photo)
-            .placeholder(R.drawable.ic_launcher_background)
-            .apply(RequestOptions().override(55, 55))
-            .into(findViewById<CircleImageView>(R.id.avatar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getUsername
 
-        findViewById<TextView>(R.id.follower).text = dataUser.follower
-        findViewById<TextView>(R.id.following).text = dataUser.following
-        findViewById<TextView>(R.id.company).text = dataUser.company
-        findViewById<TextView>(R.id.location).text = dataUser.location
-        findViewById<TextView>(R.id.repository).text = dataUser.repository
-        setUpTabs()
+        configDetailViewModel(getUsername!!)
+        configViewPager()
     }
 
-    private fun setUpTabs() {
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
-        val tabs = findViewById<TabLayout>(R.id.tabs)
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(FollowersFragment(), "Pengikut")
-        adapter.addFragment(FollowingsFragment(), "Mengikuti")
-        viewPager.adapter = adapter
+    private fun configDetailViewModel(getUsername: String) {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(DetailViewModel::class.java)
+        viewModel.setDetailUser(getUsername, this)
+        viewModel.getDetailUser().observe(this, Observer {
+
+            Glide.with(this)
+                .load(it.avatar)
+                .into(findViewById<CircleImageView>(R.id.avatar_detail))
+
+            findViewById<TextView>(R.id.repository_detail).text = it.repository.toString()
+            findViewById<TextView>(R.id.follower_detail).text = resources.getString(R.string.followers, it.followers)
+            findViewById<TextView>(R.id.following_detail).text = resources.getString(R.string.followings, it.followings)
+            findViewById<TextView>(R.id.name_user_detail).text = it.name
+            findViewById<TextView>(R.id.company_detail).text = it.company
+            findViewById<TextView>(R.id.location_detail).text = it.location
+
+            showLoading(false)
+        })
+    }
+
+    private fun configViewPager() {
+        val sectionsPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
+        viewPager.adapter = sectionsPagerAdapter
         tabs.setupWithViewPager(viewPager)
-
-        tabs.getTabAt(0)!!.setText(R.string.txt_follower)
-        tabs.getTabAt(1)!!.setText(R.string.txt_following)
-
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            progressBar_detail.visibility = View.VISIBLE
+            avatar_detail.visibility = View.INVISIBLE
+            tabs.visibility = View.INVISIBLE
+            viewPager.visibility = View.INVISIBLE
+        } else {
+            progressBar_detail.visibility = View.GONE
+            avatar_detail.visibility = View.VISIBLE
+            tabs.visibility = View.VISIBLE
+            viewPager.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }
